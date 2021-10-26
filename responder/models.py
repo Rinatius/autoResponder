@@ -76,10 +76,10 @@ class Question(models.Model):
         help_text="Topic"
     )
     text = models.TextField()
-    search_vector = SearchVectorField(null=True, blank=True)
-
-    class Meta:
-        indexes = (GinIndex(fields=["search_vector"]),)
+    # search_vector = SearchVectorField(null=True, blank=True)
+    #
+    # class Meta:
+    #     indexes = (GinIndex(fields=["search_vector"]),)
 
     def __str__(self):
         return self.text
