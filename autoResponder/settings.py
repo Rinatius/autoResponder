@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'responder.apps.ResponderConfig',
     'users',
     'rest_framework',
-    'django.contrib.postgres'
+    'django.contrib.postgres',
+    'django_elasticsearch_dsl'
 ]
 
 MIDDLEWARE = [
@@ -137,4 +138,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
 }
