@@ -1,6 +1,10 @@
-from django.contrib.postgres.indexes import GinIndex
-from django.contrib.postgres.search import SearchVectorField
+import tensorflow as tf
+import tensorflow_hub as hub
+# import numpy as np
+import tensorflow_text
 from django.db import models
+
+from responder.apps import ResponderConfig
 
 
 class Language(models.Model):
@@ -80,6 +84,13 @@ class Question(models.Model):
     #
     # class Meta:
     #     indexes = (GinIndex(fields=["search_vector"]),)
+
+    def get_embedding(self):
+        embeddings = ResponderConfig.neural_model.signatures['question_encoder'](
+            tf.constant([self.text, ]))
+        print("EMBEDDINGS HERE")
+        print(embeddings['outputs'].numpy()[0])
+        return list(embeddings['outputs'].numpy()[0])
 
     def __str__(self):
         return self.text

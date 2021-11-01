@@ -1,10 +1,19 @@
-from django_elasticsearch_dsl import Document
+from django_elasticsearch_dsl import Document, fields, DEDField, Field
 from django_elasticsearch_dsl.registries import registry
 from .models import Question
 
 
+class DenseVector(DEDField, Field):
+    name = 'dense_vector'
+
+    def __init__(self, dims, attr=None, **kwargs):
+        super(DenseVector, self).__init__(attr=attr, dims=dims, **kwargs)
+
+
 @registry.register_document
 class QuestionDocument(Document):
+    embedding = DenseVector(512, attr='get_embedding')
+
     class Index:
         # Name of the Elasticsearch index
         name = 'questions'

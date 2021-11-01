@@ -10,8 +10,9 @@ django = "*"
 djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
-psycopg2 = "*"
 django-elasticsearch-dsl = "*"
+tensorflow-hub = "*"
+tensorflow-text = "*"
 
 [requires]
 python_version = "3.7"
