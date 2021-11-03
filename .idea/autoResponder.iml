@@ -6,7 +6,7 @@
         <option name="rootFolder" value="$MODULE_DIR$" />
         <option name="settingsModule" value="autoResponder/settings.py" />
         <option name="manageScript" value="$MODULE_DIR$/manage.py" />
-        <option name="environment" value="&lt;map/&gt;" />
+        <option name="environment" value="&lt;map&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;GOOGLE_CLOUD_DB_USER&lt;/string&gt;&#10;    &lt;string&gt;auto_responder_admin&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;GOOGLE_CLOUD_DB_PASS&lt;/string&gt;&#10;    &lt;string&gt;Eh38dkDDuzS8VBa&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;  &lt;entry&gt;&#10;    &lt;string&gt;GOOGLE_CLOUD_DB_NAME&lt;/string&gt;&#10;    &lt;string&gt;autoResponderElections&lt;/string&gt;&#10;  &lt;/entry&gt;&#10;&lt;/map&gt;" />
         <option name="doNotUseTestRunner" value="false" />
         <option name="trackFilePattern" value="migrations" />
       </configuration>
