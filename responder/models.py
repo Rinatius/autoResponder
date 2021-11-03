@@ -50,6 +50,12 @@ class Answer(models.Model):
     )
     text = models.TextField()
 
+    def get_embedding(self):
+        embeddings = ResponderConfig.neural_model.signatures['response_encoder'](
+            input=tf.constant([self.text, ]),
+            context=tf.constant([self.text, ]))
+        return list(embeddings['outputs'].numpy()[0])
+
     def __str__(self):
         return self.text
 
@@ -88,8 +94,6 @@ class Question(models.Model):
     def get_embedding(self):
         embeddings = ResponderConfig.neural_model.signatures['question_encoder'](
             tf.constant([self.text, ]))
-        print("EMBEDDINGS HERE")
-        print(embeddings['outputs'].numpy()[0])
         return list(embeddings['outputs'].numpy()[0])
 
     def __str__(self):
