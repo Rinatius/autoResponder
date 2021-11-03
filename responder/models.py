@@ -51,9 +51,16 @@ class Answer(models.Model):
     text = models.TextField()
 
     def get_embedding(self):
+        answer_context = self.text.split('. ', 1)
+        answer = answer_context[0]
+        if len(answer_context) > 1:
+            context = answer_context[1]
+        else:
+            context = answer_context[0]
+
         embeddings = ResponderConfig.neural_model.signatures['response_encoder'](
-            input=tf.constant([self.text, ]),
-            context=tf.constant([self.text, ]))
+            input=tf.constant([answer, ]),
+            context=tf.constant([context, ]))
         return list(embeddings['outputs'].numpy()[0])
 
     def __str__(self):

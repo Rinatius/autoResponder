@@ -70,7 +70,7 @@ class ElasticSearchFilter(filters.SearchFilter):
 
         # q = self.generate_q_expression(search_term)
         # search = self.document_class.search().query(q)
-        search = self.generate_search(self.document_class, search_term)
+        search = self.generate_search(self.document_class, search_term)[:3]
         print("SEARCH results")
         results = search.execute()
         print(results)
@@ -79,8 +79,8 @@ class ElasticSearchFilter(filters.SearchFilter):
         response = search.to_queryset()
         print("Elastic search complete!!!")
 
-        queryset = queryset.intersection(response)
-        return queryset
+        #queryset = queryset.intersection(response)
+        return response
 
 
 class QuestionElasticSearchFilter(ElasticSearchFilter):
@@ -122,6 +122,31 @@ class QuestionCosineElasticSearchFilter(ElasticSearchFilter):
               )
         return q
 
+# class QuestionEuclideanElasticSearchFilter(ElasticSearchFilter):
+#     search_param = "euclidean"
+#     search_title = _('Euclidean Elastic Search')
+#
+#     serializer_class = QuestionSerializer
+#     document_class = QuestionDocument
+#
+#     def generate_q_expression(self, query):
+#         vector = ResponderConfig.neural_model.signatures['question_encoder'](
+#             tf.constant([query, ]))
+#         vector = list(vector['outputs'].numpy()[0])
+#         q = Q("function_score",
+#               # query=Q(
+#               #     'bool',
+#               #     must=[
+#               #         Q('match', test='a'),
+#               #     ]),
+#               script_score={"script": {
+#                   "source": "1 / (1 + l1norm(params.queryVector, 'embedding'))",
+#                   "params": {
+#                       "queryVector": vector
+#                   }
+#               }},
+#               )
+#         return q
 
 class AnswerCosineElasticSearchFilter(QuestionCosineElasticSearchFilter):
     serializer_class = AnswerSerializer
