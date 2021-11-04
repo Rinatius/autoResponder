@@ -11,8 +11,11 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 django-elasticsearch-dsl = "*"
-tensorflow-hub = "*"
-tensorflow-text = "*"
+keras = "2.6.0"
+tensorflow = "2.6.2"
+tensorflow-hub = "0.12.0"
+tensorflow-text = "2.6.2"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"

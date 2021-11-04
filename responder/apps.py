@@ -8,5 +8,5 @@ class ResponderConfig(AppConfig):
     name = 'responder'
 
     neural_model = module = hub.load(
-        'responder/neuralnetworks/universal-sentence-encoder-multilingual-qa_3/'
+        'https://tfhub.dev/google/universal-sentence-encoder-multilingual-qa/3'
     )
