@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'users',
     'rest_framework',
     'django.contrib.postgres',
-    'django_elasticsearch_dsl'
+    'django_elasticsearch_dsl',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -82,22 +83,22 @@ WSGI_APPLICATION = 'autoResponder.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'autoresponder',
-    #     'USER': 'admin',
-    #     'PASSWORD': 'admin',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('GOOGLE_CLOUD_DB_NAME', ''),
-        'USER': os.getenv('GOOGLE_CLOUD_DB_USER', ''),
-        'PASSWORD': os.getenv('GOOGLE_CLOUD_DB_PASS', ''),
+        'NAME': 'autoresponder',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': os.getenv('GOOGLE_CLOUD_DB_NAME', ''),
+    #     'USER': os.getenv('GOOGLE_CLOUD_DB_USER', ''),
+    #     'PASSWORD': os.getenv('GOOGLE_CLOUD_DB_PASS', ''),
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -145,9 +146,18 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ]
 }
 
 ELASTICSEARCH_DSL = {
