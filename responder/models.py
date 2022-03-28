@@ -35,6 +35,28 @@ class Topic(models.Model):
         return self.name
 
 
+class Article(models.Model):
+    header = models.TextField()
+    lid = models.TextField()
+    url = models.URLField()
+    text = models.TextField()
+    campaign = models.ForeignKey(
+        Campaign,
+        on_delete=models.CASCADE,
+        related_name="article",
+        help_text="Campaign"
+    )
+    language = models.ForeignKey(
+        Language,
+        on_delete=models.CASCADE,
+        related_name="article",
+        help_text="Language"
+    )
+
+    def __str__(self):
+        return self.text
+
+
 class Answer(models.Model):
     campaign = models.ForeignKey(
         Campaign,
@@ -47,6 +69,14 @@ class Answer(models.Model):
         on_delete=models.CASCADE,  # TODO Change deletion model
         related_name="answers",
         help_text="Language"
+    )
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name="answers",
+        help_text="Article",
+        blank=True,
+        null=True
     )
     text = models.TextField()
 

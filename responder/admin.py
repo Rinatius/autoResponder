@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from responder.models import Campaign, Language, Topic, Answer, Question
+from responder.models import Campaign, Language, Topic, Answer, Question, Article
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -13,3 +13,4 @@ admin.site.register(Language)
 admin.site.register(Topic)
 admin.site.register(Answer)
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Article)

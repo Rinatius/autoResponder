@@ -10,3 +10,6 @@ class ResponderConfig(AppConfig):
     neural_model = module = hub.load(
         'https://tfhub.dev/google/universal-sentence-encoder-multilingual-qa/3'
     )
+
+    def ready(self):
+        import responder.signals

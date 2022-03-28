@@ -8,11 +8,12 @@ from rest_framework.response import Response
 
 from responder.apps import ResponderConfig
 from responder.documents import QuestionDocument, AnswerDocument
-from responder.models import Campaign, Answer, Question
-from responder.serializer import CampaignSerializer, AnswerSerializer, QuestionSerializer
+from responder.models import Campaign, Answer, Question, Article
+from responder.serializer import CampaignSerializer, AnswerSerializer, QuestionSerializer, ArticleSerializer
 from django.utils.translation import gettext_lazy as _
 import tensorflow as tf
 
+from .logic import make_paired_sentences
 
 # class FullTextQuestionSearchFilter(filters.BaseFilterBackend):
 #     """Query Questions on the basis of `search` query param."""
@@ -166,6 +167,13 @@ class AnswerViewSet(viewsets.ModelViewSet):
     serializer_class = AnswerSerializer
     queryset = Answer.objects.all()
     filter_backends = [AnswerCosineElasticSearchFilter, ]
+    search_fields = ['text']
+
+
+class ArticleViewSet(viewsets.ModelViewSet):
+    serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
+    filters_backend = []
     search_fields = ['text']
 
 # class ElasticSearchViewSet(viewsets.ViewSet):

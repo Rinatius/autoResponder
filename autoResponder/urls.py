@@ -31,6 +31,9 @@ router.register(api_v1 + r'answers',
 router.register(api_v1 + r'questions',
                 responder_app.QuestionViewSet,
                 basename='question')
+router.register(api_v1 + r'articles',
+                responder_app.ArticleViewSet,
+                basename='articles')
 urlpatterns = [
     path('admin/', admin.site.urls),
 ] + router.urls
