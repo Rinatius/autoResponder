@@ -135,3 +135,19 @@ class Question(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Image(models.Model):
+    campaign = models.ForeignKey(
+        Campaign,
+        on_delete=models.CASCADE,
+        related_name="images",
+        help_text="Campaign"
+    )
+    topic = models.ForeignKey(
+        Topic,
+        on_delete=models.CASCADE,
+        related_name="images",
+        help_text="Topic"
+    )
+    image = models.ImageField(upload_to='media/% Y/% m/% d/')

@@ -3,17 +3,19 @@ import abc
 from django.contrib.admin.utils import unquote
 from django.shortcuts import render
 from elasticsearch_dsl import Q
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from responder.apps import ResponderConfig
 from responder.documents import QuestionDocument, AnswerDocument
-from responder.models import Campaign, Answer, Question, Article
-from responder.serializer import CampaignSerializer, AnswerSerializer, QuestionSerializer, ArticleSerializer
+from responder.models import Campaign, Answer, Question, Article, Image
+from responder.serializer import CampaignSerializer, AnswerSerializer, QuestionSerializer, ArticleSerializer, ImageSerializer
 from django.utils.translation import gettext_lazy as _
 import tensorflow as tf
 
-from .logic import make_paired_sentences
+from .logic import make_paired_sentences, upload_image
+
 
 # class FullTextQuestionSearchFilter(filters.BaseFilterBackend):
 #     """Query Questions on the basis of `search` query param."""
@@ -175,6 +177,12 @@ class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     filters_backend = []
     search_fields = ['text']
+
+
+class ImageViewSet(viewsets.ModelViewSet):
+    serializer_class = ImageSerializer
+    queryset = Image.objects.all()
+
 
 # class ElasticSearchViewSet(viewsets.ViewSet):
 #     serializer_class = None
