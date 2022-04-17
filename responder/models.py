@@ -78,6 +78,7 @@ class Answer(models.Model):
         blank=True,
         null=True
     )
+    url = models.URLField(blank=True, null=True)
     text = models.TextField()
 
     def get_embedding(self):
