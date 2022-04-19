@@ -37,7 +37,7 @@ class Topic(models.Model):
 
 class Article(models.Model):
     header = models.TextField()
-    lid = models.TextField()
+    lid = models.TextField(blank=True, null=True)
     url = models.URLField()
     text = models.TextField()
     campaign = models.ForeignKey(
