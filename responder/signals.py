@@ -12,12 +12,15 @@ def post_save_article(created, **kwargs):
         Answer.objects.filter(article=instance.pk).delete()
 
     paired_sentences = make_paired_sentences(instance.text)
-
-    for pair in paired_sentences:
-        answer = Answer.objects.create(
-            campaign_id=instance.campaign_id,
-            language_id=instance.language_id,
-            text=pair,
-            article_id=instance.pk
-        )
+    if len(paired_sentences) > 1:
+        for pair in paired_sentences:
+            answer = Answer.objects.create(
+                campaign_id=instance.campaign_id,
+                language_id=instance.language_id,
+                text=pair,
+                article_id=instance.pk
+            )
+            answer.save()
+    else:
+        answer = paired_sentences
         answer.save()
