@@ -36,7 +36,10 @@ router.register(api_v1 + r'articles',
                 basename='articles')
 router.register(api_v1 + r'image',
                 responder_app.ImageViewSet,
-                basename='articles')
+                basename='image')
+router.register(api_v1 + r'image_answer',
+                responder_app.ImageAnswerViewSet,
+                basename='image_answer')
 urlpatterns = [
     path('admin/', admin.site.urls),
 ] + router.urls

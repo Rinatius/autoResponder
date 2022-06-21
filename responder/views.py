@@ -8,13 +8,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from responder.apps import ResponderConfig
-from responder.documents import QuestionDocument, AnswerDocument
-from responder.models import Campaign, Answer, Question, Article, Image
-from responder.serializer import CampaignSerializer, AnswerSerializer, QuestionSerializer, ArticleSerializer, ImageSerializer
+from responder.documents import QuestionDocument, AnswerDocument, ImageDocument
+from responder.models import Campaign, Answer, Question, Article, Image, ImageAnswer
+from responder.serializer import CampaignSerializer, AnswerSerializer, QuestionSerializer, ArticleSerializer, \
+    ImageSerializer, ImageAnswerSerializer
 from django.utils.translation import gettext_lazy as _
 import tensorflow as tf
 
-from .logic import make_paired_sentences, upload_image
+from .logic import make_paired_sentences
 
 
 # class FullTextQuestionSearchFilter(filters.BaseFilterBackend):
@@ -82,7 +83,7 @@ class ElasticSearchFilter(filters.SearchFilter):
         response = search.to_queryset()
         print("Elastic search complete!!!")
 
-        #queryset = queryset.intersection(response)
+        # queryset = queryset.intersection(response)
         return response
 
 
@@ -125,6 +126,29 @@ class QuestionCosineElasticSearchFilter(ElasticSearchFilter):
               )
         return q
 
+
+class ImageCosineElasticSearchFilter(ElasticSearchFilter):
+    search_param = "cosine"
+    search_title = _('Cosine Elastic Search')
+
+    serializer_class = ImageSerializer
+    document_class = ImageDocument
+
+    def generate_q_expression(self, query):
+        vector = ResponderConfig.neural_model.signatures['question_encoder'](
+            tf.constant([query, ]))
+        vector = list(vector['outputs'].numpy()[0])
+        q = Q("function_score",
+              script_score={"script": {
+                  "source": "cosineSimilarity(params.queryVector, 'embedding') + 1.0",
+                  "params": {
+                      "queryVector": vector
+                  }
+              }},
+              )
+        return q
+
+
 # class QuestionEuclideanElasticSearchFilter(ElasticSearchFilter):
 #     search_param = "euclidean"
 #     search_title = _('Euclidean Elastic Search')
@@ -156,6 +180,11 @@ class AnswerCosineElasticSearchFilter(QuestionCosineElasticSearchFilter):
     document_class = AnswerDocument
 
 
+class ImageCosineElasticSearchField(ImageCosineElasticSearchFilter):
+    serializer_class = ImageSerializer
+    document_class = ImageDocument
+
+
 class QuestionViewSet(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
     queryset = Question.objects.all()
@@ -183,6 +212,18 @@ class ImageViewSet(viewsets.ModelViewSet):
     serializer_class = ImageSerializer
     queryset = Image.objects.all()
 
+
+class ImageAnswerViewSet(viewsets.ModelViewSet):
+    serializer_class = ImageAnswerSerializer
+    queryset = ImageAnswer.objects.all()
+    filter_backends = [ImageCosineElasticSearchField]
+    search_fields = ['image']
+
+    def create(self, request, *args, **kwargs):
+        serializer = ImageAnswerSerializer(data=request.data, many=False)
+        serializer.is_valid(raise_exception=True)
+        # image =
+        # return Response({}, status=status.HTTP_201_CREATED)
 
 # class ElasticSearchViewSet(viewsets.ViewSet):
 #     serializer_class = None

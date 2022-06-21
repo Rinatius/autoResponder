@@ -1,7 +1,12 @@
+import datetime
+import os.path
+
 import tensorflow as tf
 import tensorflow_hub as hub
-# import numpy as np
+import numpy as np
 import tensorflow_text
+import cv2
+import face_recognition
 from django.db import models
 
 from responder.apps import ResponderConfig
@@ -124,6 +129,7 @@ class Question(models.Model):
         help_text="Topic"
     )
     text = models.TextField()
+
     # search_vector = SearchVectorField(null=True, blank=True)
     #
     # class Meta:
@@ -151,4 +157,23 @@ class Image(models.Model):
         related_name="images",
         help_text="Topic"
     )
-    image = models.ImageField(upload_to='media/% Y/% m/% d/')
+
+    img_path = '{:media/%Y/%m/%d/}'.format(datetime.datetime.now())
+    image = models.ImageField(upload_to=img_path)
+
+    def get_embedding(self):
+        img = cv2.imread(self.image.path)
+        rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_encoding = list(face_recognition.face_encodings(rgb_img, model='large')[0])
+        face_locations = face_recognition.face_locations(rgb_img)
+        for number, face_location in enumerate(face_locations):
+            y1, x2, y2, x1 = face_location[0], face_location[1], face_location[2], face_location[3]
+            crop_img = img[y1:y2, x1:x2]
+            cv2.imwrite(self.image.path, crop_img)
+            return img_encoding
+
+
+class ImageAnswer(models.Model):
+    img_path = '{:mediaAnswer/%Y/%m/%d/}'.format(datetime.datetime.now())
+    image = models.ImageField(upload_to=img_path)
+

@@ -1,6 +1,6 @@
 from django_elasticsearch_dsl import Document, fields, DEDField, Field
 from django_elasticsearch_dsl.registries import registry
-from .models import Question, Answer
+from .models import Question, Answer, Image
 
 
 class DenseVector(DEDField, Field):
@@ -58,4 +58,24 @@ class AnswerDocument(Document):
         # The fields of the model you want to be indexed in Elasticsearch
         fields = [
             'text',
+        ]
+
+
+@registry.register_document
+class ImageDocument(Document):
+    embedding = DenseVector(128, attr='get_embedding')
+
+    class Index:
+        # Name of the Elasticsearch index
+        name = 'images'
+        # See Elasticsearch Indices API reference for available settings
+        settings = {'number_of_shards': 1,
+                    'number_of_replicas': 0}
+
+    class Django:
+        model = Image # The model associated with this Document
+
+        # The fields of the model you want to be indexed in Elasticsearch
+        fields = [
+            'image',
         ]

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from responder.models import Campaign, Answer, Question, Article, Image
+from responder.models import Campaign, Answer, Question, Article, Image, ImageAnswer
 
 
 class CampaignSerializer(serializers.ModelSerializer):
@@ -31,4 +31,10 @@ class AnswerSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
+        fields = '__all__'
+
+
+class ImageAnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageAnswer
         fields = '__all__'
