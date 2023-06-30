@@ -85,10 +85,10 @@ WSGI_APPLICATION = 'autoResponder.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'test_articles',
-        'USER': 'karimkabirov',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'NAME': 'test',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres',
         'PORT': '5432',
     }
     # 'default': {
