@@ -11,6 +11,7 @@ WORKDIR /app
 COPY ./Pipfile /app/Pipfile
 COPY ./Pipfile.lock /app/Pipfile.lock
 RUN pipenv install --system --deploy --ignore-pipfile
+RUN python -m nltk.downloader punkt
 
 COPY . /app
 
