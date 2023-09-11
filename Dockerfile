@@ -6,6 +6,8 @@ RUN set -xe \
     && apt upgrade -y
 
 RUN pip install -U pipenv
+RUN pip install --no-cache-dir openai
+RUN pip install --no-cache-dir google-cloud-translate
 
 WORKDIR /app
 COPY ./Pipfile /app/Pipfile
