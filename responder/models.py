@@ -5,6 +5,7 @@ import tensorflow_text
 from django.db import models
 
 from responder.apps import ResponderConfig
+from responder.utils import translate_text
 
 
 class Language(models.Model):
@@ -88,6 +89,9 @@ class Answer(models.Model):
             context = answer_context[1]
         else:
             context = answer_context[0]
+
+        answer = translate_text(answer)
+        context = translate_text(context)
 
         embeddings = ResponderConfig.neural_model.signatures['response_encoder'](
             input=tf.constant([answer, ]),
