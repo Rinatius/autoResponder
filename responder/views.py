@@ -6,6 +6,8 @@ from elasticsearch_dsl import Q
 from rest_framework import viewsets, filters
 from rest_framework.response import Response
 
+from responder.utils import translate_text
+from responder.utils import get_gpt_response
 from responder.apps import ResponderConfig
 from responder.documents import QuestionDocument, AnswerDocument
 from responder.models import Campaign, Answer, Question, Article
@@ -80,9 +82,10 @@ class ElasticSearchFilter(filters.SearchFilter):
         response = search.to_queryset()
         print("Elastic search complete!!!")
 
+        # TODO add code for the sort operation with chat gpt
+
         #queryset = queryset.intersection(response)
         return response
-
 
 class QuestionElasticSearchFilter(ElasticSearchFilter):
     serializer_class = QuestionSerializer
@@ -105,6 +108,7 @@ class QuestionCosineElasticSearchFilter(ElasticSearchFilter):
     document_class = QuestionDocument
 
     def generate_q_expression(self, query):
+        query = translate_text(query)
         vector = ResponderConfig.neural_model.signatures['question_encoder'](
             tf.constant([query, ]))
         vector = list(vector['outputs'].numpy()[0])
