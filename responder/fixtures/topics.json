@@ -1,0 +1,10 @@
+[
+  {
+    "model": "responder.topic",
+    "pk": 1,
+    "fields": {
+      "name": "QA_topic",
+      "campaign": 1
+    }
+  }
+]

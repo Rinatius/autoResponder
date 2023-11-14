@@ -1,0 +1,156 @@
+[
+  {
+    "model": "responder.question",
+    "pk": 1,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 1,
+      "topic": 1,
+      "text": "Как восстановить пароль?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 2,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 2,
+      "topic": 1,
+      "text": "Как изменить личные данные в профиле?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 3,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 3,
+      "topic": 1,
+      "text": "Как проверить статус заказа?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 4,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 4,
+      "topic": 1,
+      "text": "Что делать, если у меня проблемы с оплатой?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 5,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 5,
+      "topic": 1,
+      "text": "Как отменить заказ?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 6,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 6,
+      "topic": 1,
+      "text": "Как связаться с вашей службой поддержки?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 7,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 7,
+      "topic": 1,
+      "text": "Как узнать о текущих акциях и скидках?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 8,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 8,
+      "topic": 1,
+      "text": "Как узнать о сроках и стоимости доставки?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 9,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 9,
+      "topic": 1,
+      "text": "Что делать, если товар пришел с дефектом?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 10,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 10,
+      "topic": 1,
+      "text": "Как отследить посылку?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 11,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 11,
+      "topic": 1,
+      "text": "Как получить счет-фактуру на свой заказ?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 12,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 12,
+      "topic": 1,
+      "text": "Какие способы оплаты вы принимаете?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 13,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 13,
+      "topic": 1,
+      "text": "Как отключить уведомления по электронной почте?"
+    }
+  },
+  {
+    "model": "responder.question",
+    "pk": 14,
+    "fields": {
+      "campaign": 1,
+      "language": 2,
+      "answer": 14,
+      "topic": 1,
+      "text": "Как вернуть товар и получить возврат средств?"
+    }
+  }
+]
