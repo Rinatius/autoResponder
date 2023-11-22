@@ -1,7 +1,6 @@
 [
   {
     "model": "responder.language",
-    "pk": 1,
     "fields": {
       "name": "English",
       "short_name": "en"
@@ -9,7 +8,6 @@
   },
   {
     "model": "responder.language",
-    "pk": 2,
     "fields": {
       "name": "Russian",
       "short_name": "ru"
@@ -17,7 +15,6 @@
   },
   {
     "model": "responder.language",
-    "pk": 3,
     "fields": {
       "name": "Kyrgyz",
       "short_name": "kg"

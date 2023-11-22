@@ -1,7 +1,6 @@
 [
   {
     "model": "responder.campaign",
-    "pk": 1,
     "fields": {
       "name": "QA"
     }

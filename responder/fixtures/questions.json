@@ -1,7 +1,6 @@
 [
   {
     "model": "responder.question",
-    "pk": 1,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -12,7 +11,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 2,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -23,7 +21,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 3,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -34,7 +31,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 4,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -45,7 +41,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 5,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -56,7 +51,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 6,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -67,7 +61,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 7,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -78,7 +71,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 8,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -89,7 +81,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 9,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -100,7 +91,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 10,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -111,7 +101,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 11,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -122,7 +111,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 12,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -133,7 +121,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 13,
     "fields": {
       "campaign": 1,
       "language": 2,
@@ -144,7 +131,6 @@
   },
   {
     "model": "responder.question",
-    "pk": 14,
     "fields": {
       "campaign": 1,
       "language": 2,

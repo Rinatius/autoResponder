@@ -1,128 +1,128 @@
 [
   {
     "model": "responder.answer",
-    "pk": 1,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Для восстановления пароля, перейдите на страницу входа и выберите опцию 'Забыли пароль?'."
+      "text": "Для восстановления пароля, перейдите на страницу входа и выберите опцию 'Забыли пароль?'.",
+      "english_text": "To reset your password, go to the login page and select the 'Forgot Password?' option."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 2,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Личные данные можно изменить в настройках профиля после входа в систему."
+      "text": "Личные данные можно изменить в настройках профиля после входа в систему.",
+      "english_text": "You can update personal information in the profile settings after logging into the system."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 3,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Войдите в свой аккаунт и перейдите в раздел 'Мои заказы' для проверки статуса заказа."
+      "text": "Войдите в свой аккаунт и перейдите в раздел 'Мои заказы' для проверки статуса заказа.",
+      "english_text": "Log in to your account and go to the 'My Orders' section to check the status of your order."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 4,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Пожалуйста, свяжитесь с нашей службой поддержки по номеру телефона или электронной почте для получения помощи с оплатой."
+      "text": "Пожалуйста, свяжитесь с нашей службой поддержки по номеру телефона или электронной почте для получения помощи с оплатой.",
+      "english_text": "Please contact our support service by phone or email for assistance with payment."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 5,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Перейдите в раздел 'Мои заказы' и выберите опцию отмены заказа, если это возможно. В противном случае, свяжитесь с нами для получения дополнительной помощи."
+      "text": "Перейдите в раздел 'Мои заказы' и выберите опцию отмены заказа, если это возможно. В противном случае, свяжитесь с нами для получения дополнительной помощи.",
+      "english_text": "Go to the 'My Orders' section and select the option to cancel the order if possible. Otherwise, contact us for further assistance."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 6,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Вы можете связаться с нашей службой поддержки по телефону, электронной почте или через онлайн-чат на нашем сайте."
+      "text": "Вы можете связаться с нашей службой поддержки по телефону, электронной почте или через онлайн-чат на нашем сайте.",
+      "english_text": "You can contact our support service by phone, email, or through the online chat on our website."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 7,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Подпишитесь на нашу рассылку или посетите раздел 'Акции' на нашем сайте."
+      "text": "Подпишитесь на нашу рассылку или посетите раздел 'Акции' на нашем сайте.",
+      "english_text": "Subscribe to our newsletter or visit the 'Promotions' section on our website."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 8,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Информация о сроках и стоимости доставки доступна на странице оформления заказа или в разделе 'Доставка' на сайте."
+      "text": "Информация о сроках и стоимости доставки доступна на странице оформления заказа или в разделе 'Доставка' на сайте.",
+      "english_text": "Information about delivery times and costs is available on the order checkout page or in the 'Delivery' section on the website."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 9,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Пожалуйста, свяжитесь с нашей службой поддержки и предоставьте фотографии дефекта для обмена или возврата."
+      "text": "Пожалуйста, свяжитесь с нашей службой поддержки и предоставьте фотографии дефекта для обмена или возврата.",
+      "english_text": "Please contact our support service and provide photos of the defect for exchange or return."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 10,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Перейдите на страницу продукта на нашем сайте и выберите опцию 'Оставить отзыв'."
+      "text": "Перейдите на страницу продукта на нашем сайте и выберите опцию 'Оставить отзыв'.",
+      "english_text": "Go to the product page on our website and select the 'Leave a Review' option."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 11,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "После отправки заказа вы получите номер отслеживания по электронной почте. Используйте его на сайте службы доставки."
+      "text": "После отправки заказа вы получите номер отслеживания по электронной почте. Используйте его на сайте службы доставки.",
+      "english_text": "After sending the order, you will receive a tracking number by email. Use it on the delivery service's website."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 12,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Счет-фактура будет прикреплена к вашему заказу. Вы можете скачать ее из раздела 'Мои заказы' на сайте."
+      "text": "Счет-фактура будет прикреплена к вашему заказу. Вы можете скачать ее из раздела 'Мои заказы' на сайте.",
+      "english_text": "The invoice will be attached to your order. You can download it from the 'My Orders' section on the website."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 13,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Мы принимаем оплату банковскими картами, электронными платежами и другими доступными методами, которые указаны на сайте."
+      "text": "Мы принимаем оплату банковскими картами, электронными платежами и другими доступными методами, которые указаны на сайте.",
+      "english_text": "We accept payment by credit cards, electronic payments, and other available methods as specified on the website."
     }
   },
   {
     "model": "responder.answer",
-    "pk": 14,
     "fields": {
       "campaign": 1,
       "language": 2,
-      "text": "Вы можете настроить уведомления в настройках аккаунта или отписаться от рассылки, следуя инструкциям в конце каждого письма."
+      "text": "Вы можете настроить уведомления в настройках аккаунта или отписаться от рассылки, следуя инструкциям в конце каждого письма.",
+      "english_text": "You can configure notifications in your account settings or unsubscribe from the newsletter by following the instructions at the end of each email."
     }
   }
 ]
