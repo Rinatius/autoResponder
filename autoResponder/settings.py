@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'autoresponder',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -164,7 +164,9 @@ REST_FRAMEWORK = {
 # https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
 
 ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': 'http://localhost:9200'
-    },
+    "default": {"hosts": "http://localhost:9200"},
 }
+
+# Open AI
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "Please, set openai api key")
+OPENAI_MODEL = "gpt-3.5-turbo-1106"
