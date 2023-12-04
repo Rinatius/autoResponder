@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+import ast
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-)mprq@m3y7lm=!snb7$m_w*j*2@eaux_v2@a&#sujyppau*89u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
@@ -44,17 +45,24 @@ INSTALLED_APPS = [
     'rest_framework',
     'django.contrib.postgres',
     'django_elasticsearch_dsl',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://journal-bb5e3.uc.r.appspot.com',
+    'https://kloopmedia.github.io',
+    'http://localhost:3000'
 ]
 
 ROOT_URLCONF = 'autoResponder.urls'
@@ -78,6 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'autoResponder.wsgi.application'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -120,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -134,11 +142,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -162,10 +170,8 @@ REST_FRAMEWORK = {
 
 # Elasticsearch
 # https://django-elasticsearch-dsl.readthedocs.io/en/latest/settings.html
+ELASTICSEARCH_DSL = {"default": ast.literal_eval(os.getenv('ELASTICSEARCH_DSL'))}
 
-ELASTICSEARCH_DSL = {
-    "default": {"hosts": "http://localhost:9200"},
-}
 
 # Open AI
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "Please, set openai api key")
