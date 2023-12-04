@@ -3,6 +3,5 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-
     def __str__(self):
         return self.email + " " + self.last_name

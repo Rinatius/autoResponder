@@ -19,18 +19,16 @@ from rest_framework.routers import DefaultRouter
 
 import responder.views as responder_app
 
-api_v1 = r'api/v1/'
+api_v1 = r"api/v1/"
 
 router = DefaultRouter()
-router.register(api_v1 + r'campaigns',
-                responder_app.CampaignViewSet,
-                basename='campaign'),
-router.register(api_v1 + r'answers',
-                responder_app.AnswerViewSet,
-                basename='answer')
-router.register(api_v1 + r'questions',
-                responder_app.QuestionViewSet,
-                basename='question')
+router.register(
+    api_v1 + r"campaigns", responder_app.CampaignViewSet, basename="campaign"
+),
+router.register(api_v1 + r"answers", responder_app.AnswerViewSet, basename="answer")
+router.register(
+    api_v1 + r"questions", responder_app.QuestionViewSet, basename="question"
+)
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ] + router.urls
