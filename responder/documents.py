@@ -4,7 +4,7 @@ from .models import Question, Answer
 
 
 class DenseVector(DEDField, Field):
-    name = 'dense_vector'
+    name = "dense_vector"
 
     def __init__(self, dims, attr=None, **kwargs):
         super(DenseVector, self).__init__(attr=attr, dims=dims, **kwargs)
@@ -12,21 +12,20 @@ class DenseVector(DEDField, Field):
 
 @registry.register_document
 class QuestionDocument(Document):
-    embedding = DenseVector(512, attr='get_embedding')
+    embedding = DenseVector(512, attr="get_embedding")
 
     class Index:
         # Name of the Elasticsearch index
-        name = 'questions'
+        name = "questions"
         # See Elasticsearch Indices API reference for available settings
-        settings = {'number_of_shards': 1,
-                    'number_of_replicas': 0}
+        settings = {"number_of_shards": 1, "number_of_replicas": 0}
 
     class Django:
-        model = Question # The model associated with this Document
+        model = Question  # The model associated with this Document
 
         # The fields of the model you want to be indexed in Elasticsearch
         fields = [
-            'text',
+            "text",
         ]
 
         # Ignore auto updating of Elasticsearch when a model is saved
@@ -43,19 +42,18 @@ class QuestionDocument(Document):
 
 @registry.register_document
 class AnswerDocument(Document):
-    embedding = DenseVector(512, attr='get_embedding')
+    embedding = DenseVector(512, attr="get_embedding")
 
     class Index:
         # Name of the Elasticsearch index
-        name = 'answers'
+        name = "answers"
         # See Elasticsearch Indices API reference for available settings
-        settings = {'number_of_shards': 1,
-                    'number_of_replicas': 0}
+        settings = {"number_of_shards": 1, "number_of_replicas": 0}
 
     class Django:
-        model = Answer # The model associated with this Document
+        model = Answer  # The model associated with this Document
 
         # The fields of the model you want to be indexed in Elasticsearch
         fields = [
-            'text',
+            "text",
         ]

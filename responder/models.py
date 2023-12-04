@@ -1,12 +1,10 @@
 import tensorflow as tf
-import tensorflow_hub as hub
 
 # import numpy as np
-import tensorflow_text
 from django.db import models
 
 from responder.apps import ResponderConfig
-from responder.utils import translate_text
+from responder.services.utils import translate_text
 
 
 class Language(models.Model):

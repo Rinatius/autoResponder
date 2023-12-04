@@ -5,7 +5,7 @@ from responder.models import Campaign, Language, Topic, Answer, Question
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    search_fields = ('search_vector', 'answer__text', 'text')
+    search_fields = ("search_vector", "answer__text", "text")
 
 
 admin.site.register(Campaign)

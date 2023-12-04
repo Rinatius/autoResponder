@@ -4,9 +4,9 @@ import tensorflow_text
 
 
 class ResponderConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'responder'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "responder"
 
     neural_model = module = hub.load(
-        'https://tfhub.dev/google/universal-sentence-encoder-multilingual-qa/3'
+        "https://tfhub.dev/google/universal-sentence-encoder-multilingual-qa/3"
     )
