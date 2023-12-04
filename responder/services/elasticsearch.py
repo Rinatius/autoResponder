@@ -1,14 +1,13 @@
-from django.db.models import Q
+from elasticsearch_dsl import Q
 from rest_framework import filters
 from django.utils.translation import gettext_lazy as _
 
-from responder.apps import ResponderConfig
-from responder.documents import QuestionDocument, AnswerDocument
+from responder.documents import AnswerDocument, QuestionDocument
 from responder.models import Answer
 from responder.serializer import QuestionSerializer
-
-from responder import exceptions
 from responder.services import utils
+from responder import exceptions
+from responder.apps import ResponderConfig
 import tensorflow as tf
 
 
@@ -46,6 +45,7 @@ class ElasticSearchFilter(filters.SearchFilter):
             return queryset
 
         search = self.generate_search(self.document_class, search_term)[:3]
+        results = search.execute()
 
         response = search.to_queryset()
         if self.document_class == AnswerDocument:
