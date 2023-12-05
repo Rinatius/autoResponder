@@ -1,13 +1,13 @@
 from rest_framework import viewsets, filters
 
-from responder.documents import AnswerDocument
 from responder.models import Campaign, Answer, Question
 from responder.serializer import (
-    CampaignSerializer,
     AnswerSerializer,
+    CampaignSerializer,
     QuestionSerializer,
 )
 from responder.services.elasticsearch import (
+    AnswerCosineElasticSearchFilter,
     QuestionCosineElasticSearchFilter,
     QuestionElasticSearchFilter,
 )
@@ -16,11 +16,6 @@ from responder.services.elasticsearch import (
 class CampaignViewSet(viewsets.ModelViewSet):
     serializer_class = CampaignSerializer
     queryset = Campaign.objects.all()
-
-
-class AnswerCosineElasticSearchFilter(QuestionCosineElasticSearchFilter):
-    serializer_class = AnswerSerializer
-    document_class = AnswerDocument
 
 
 class QuestionViewSet(viewsets.ModelViewSet):

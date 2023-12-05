@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 from responder.documents import AnswerDocument, QuestionDocument
 from responder.models import Answer
-from responder.serializer import QuestionSerializer
+from responder.serializer import QuestionSerializer, AnswerSerializer
 from responder.services import utils
 from responder import exceptions
 from responder.apps import ResponderConfig
@@ -24,8 +24,14 @@ class ElasticSearchFilter(filters.SearchFilter):
         pass
 
     def generate_search(self, document_class, query):
+        language = utils.detect_language(query)
         query_expression = self.generate_q_expression(query)
-        search = self.document_class.search().query(query_expression)
+        search = (
+            self.document_class.search()
+            .filter("term", language__short_name=language)
+            .query(query_expression)
+        )
+
         return search
 
     def get_search_terms(self, request):
@@ -106,3 +112,8 @@ class QuestionCosineElasticSearchFilter(ElasticSearchFilter):
             return super().filter_queryset(request, queryset, view)
         except exceptions.NotAQuestionException:
             raise exceptions.NotAQuestionException
+
+
+class AnswerCosineElasticSearchFilter(QuestionCosineElasticSearchFilter):
+    serializer_class = AnswerSerializer
+    document_class = AnswerDocument
