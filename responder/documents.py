@@ -1,6 +1,6 @@
 from django_elasticsearch_dsl import Document, fields, DEDField, Field
 from django_elasticsearch_dsl.registries import registry
-from .models import Question, Answer
+from .models import Question, Answer, Language
 
 
 class DenseVector(DEDField, Field):
@@ -13,6 +13,13 @@ class DenseVector(DEDField, Field):
 @registry.register_document
 class QuestionDocument(Document):
     embedding = DenseVector(512, attr="get_embedding")
+
+    language = fields.ObjectField(
+        properties={
+            "name": fields.TextField(),
+            "short_name": fields.TextField(),
+        }
+    )
 
     class Index:
         # Name of the Elasticsearch index
@@ -27,6 +34,8 @@ class QuestionDocument(Document):
         fields = [
             "text",
         ]
+
+        related_models = [Language]
 
         # Ignore auto updating of Elasticsearch when a model is saved
         # or deleted:
@@ -44,6 +53,13 @@ class QuestionDocument(Document):
 class AnswerDocument(Document):
     embedding = DenseVector(512, attr="get_embedding")
 
+    language = fields.ObjectField(
+        properties={
+            "name": fields.TextField(),
+            "short_name": fields.TextField(),
+        }
+    )
+
     class Index:
         # Name of the Elasticsearch index
         name = "answers"
@@ -57,3 +73,4 @@ class AnswerDocument(Document):
         fields = [
             "text",
         ]
+        related_models = [Language]
