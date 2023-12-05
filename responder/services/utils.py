@@ -5,6 +5,12 @@ from openai.types.chat import ChatCompletion
 from autoResponder import settings
 
 
+def detect_language(text: str) -> str:
+    """Return language short name"""
+    translate_client = translate.Client()
+    return translate_client.detect_language(text)["language"]
+
+
 def translate_text(text: str, target_language: str = "en") -> str:
     """Returns a translation of the input text into the specified
     target language using the Google Cloud Translation API"""
@@ -15,6 +21,9 @@ def translate_text(text: str, target_language: str = "en") -> str:
 
 def generate_best_response(question: str, answer_options: list[str, ...]) -> int:
     """Return index of best answer or -1 if best answer does not exist"""
+    answers = "\n".join(
+        [f"{i + 1}. {answer}" for i, answer in enumerate(answer_options)]
+    )
     prompt = f"""
     Choose the number of the correct answer, if there is no answer to the question, send "0".
     For example:
@@ -22,9 +31,7 @@ def generate_best_response(question: str, answer_options: list[str, ...]) -> int
 
     Question: {question}
     Options: 
-    1. {answer_options[0]}
-    2. {answer_options[1]}
-    3. {answer_options[2]}
+    {answers}
     Answer:
     """
 
