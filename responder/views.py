@@ -21,8 +21,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "create":
-            return serializer.AnswerCreateSerializer
-        return serializer.AnswerListSerializer
+            return serializer.QuestionCreateSerializer
+        return serializer.QuestionListSerializer
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
@@ -34,8 +34,8 @@ class AnswerViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "create":
-            return serializer.QuestionCreateSerializer
-        return serializer.QuestionListSerializer
+            return serializer.AnswerCreateSerializer
+        return serializer.AnswerListSerializer
 
     def perform_create(self, serializer):
         text = serializer.validated_data["text"]
