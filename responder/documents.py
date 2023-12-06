@@ -37,9 +37,10 @@ class QuestionDocument(Document):
 
         related_models = [Language]
 
-        def get_instances_from_related(self, related_instance):
-            if isinstance(related_instance, Language):
-                return related_instance.answers.all()
+
+    def get_instances_from_related(self, related_instance):
+        if isinstance(related_instance, Language):
+            return related_instance.answers.all()
 
         # Ignore auto updating of Elasticsearch when a model is saved
         # or deleted:
