@@ -1,38 +1,44 @@
 from rest_framework import viewsets, filters
 
-from responder.models import Campaign, Answer, Question
-from responder.serializer import (
-    AnswerSerializer,
-    CampaignSerializer,
-    QuestionSerializer,
-)
-from responder.services.elasticsearch import (
-    AnswerCosineElasticSearchFilter,
-    QuestionCosineElasticSearchFilter,
-    QuestionElasticSearchFilter,
-)
+from responder import models, serializer
+from responder.services import utils, elasticsearch
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
-    serializer_class = CampaignSerializer
-    queryset = Campaign.objects.all()
+    serializer_class = serializer.CampaignSerializer
+    queryset = models.Campaign.objects.all()
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
-    serializer_class = QuestionSerializer
-    queryset = Question.objects.all()
+    serializer_class = serializer.QuestionListSerializer
+    queryset = models.Question.objects.all()
     filter_backends = [
-        QuestionCosineElasticSearchFilter,
+        elasticsearch.QuestionCosineElasticSearchFilter,
         filters.SearchFilter,
-        QuestionElasticSearchFilter,
+        elasticsearch.QuestionElasticSearchFilter,
     ]
     search_fields = ["text"]
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return serializer.AnswerCreateSerializer
+        return serializer.AnswerListSerializer
 
 
 class AnswerViewSet(viewsets.ModelViewSet):
-    serializer_class = AnswerSerializer
-    queryset = Answer.objects.all()
+    queryset = models.Answer.objects.all()
     filter_backends = [
-        AnswerCosineElasticSearchFilter,
+        elasticsearch.AnswerCosineElasticSearchFilter,
     ]
     search_fields = ["text"]
+
+    def get_serializer_class(self):
+        if self.action == "create":
+            return serializer.QuestionCreateSerializer
+        return serializer.QuestionListSerializer
+
+    def perform_create(self, serializer):
+        text = serializer.validated_data["text"]
+        language = utils.detect_language(text)
+        language = models.Language.objects.get(short_name=language)
+        serializer.save(language=language)
