@@ -31,7 +31,7 @@ class AnswerCreateSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def validate_text(value):
-        if models.Answer.objects.filter(text=value).exists():
+        if models.Answer.objects.filter(text__iexact=value).exists():
             raise serializers.ValidationError(
                 "An answer with this text already exists."
             )
@@ -55,7 +55,7 @@ class QuestionCreateSerializer(serializers.ModelSerializer):
 
     @staticmethod
     def validate_text(value):
-        if models.Question.objects.filter(text=value).exists():
+        if models.Question.objects.filter(text__iexact=value).exists():
             raise serializers.ValidationError(
                 "An question with this text already exists."
             )

@@ -1,3 +1,5 @@
+import html
+
 from google.cloud import translate_v2 as translate
 from openai import OpenAI
 from openai.types.chat import ChatCompletion
@@ -16,7 +18,7 @@ def translate_text(text: str, target_language: str = "en") -> str:
     target language using the Google Cloud Translation API"""
     translate_client = translate.Client()
     translation = translate_client.translate(text, target_language=target_language)
-    return translation.get("translatedText")
+    return _decode_html_entities(translation.get("translatedText"))
 
 
 def generate_best_response(question: str, answer_options: list[str, ...]) -> int:
@@ -24,16 +26,14 @@ def generate_best_response(question: str, answer_options: list[str, ...]) -> int
     answers = "\n".join(
         [f"{i + 1}. {answer}" for i, answer in enumerate(answer_options)]
     )
-    prompt = f"""
-    Choose the number of the correct answer, if there is no answer to the question, send "0".
-    For example:
-    Answer: 1
+    prompt = f"""Choose the number of the correct answer, if there is no answer to the question, send "0".
+For example:
+Answer: 1
 
-    Question: {question}
-    Options: 
-    {answers}
-    Answer:
-    """
+Question: {question}
+Options: 
+{answers}
+Answer:"""
 
     model_reply = _ask_open_ai(prompt).choices[0].message.content
 
@@ -50,9 +50,8 @@ def generate_best_response(question: str, answer_options: list[str, ...]) -> int
 
 def is_question(text: str) -> bool:
     """Return True if text is question, else return False"""
-    prompt = f"""
-    Determine if it is a question, if it is a question, send 1, and if not, send 0.
-    Text: {text}
+    prompt = f"""Determine if it is a question, if it is a question, send 1, and if not, send 0.
+Text: {text}
     """
 
     model_reply = _ask_open_ai(prompt).choices[0].message.content
@@ -83,3 +82,9 @@ def _to_bool(val: str) -> bool:
     if val.lower() in ["0", "nok", "no", "n"]:
         return False
     raise ValueError(f"Invalid given value '{val}' (expected a boolean)")
+
+
+def _decode_html_entities(text: str) -> str:
+    """Returns a string without HTML encoding characters"""
+    decoded_string = html.unescape(text)
+    return decoded_string
