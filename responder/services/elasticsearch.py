@@ -2,11 +2,9 @@ from elasticsearch_dsl import Q
 from rest_framework import filters
 from django.utils.translation import gettext_lazy as _
 
-from responder.documents import AnswerDocument, QuestionDocument
 from responder.models import Answer
-from responder.serializer import QuestionSerializer, AnswerSerializer
 from responder.services import utils
-from responder import exceptions
+from responder import documents, exceptions, serializer
 from responder.apps import ResponderConfig
 import tensorflow as tf
 
@@ -54,7 +52,7 @@ class ElasticSearchFilter(filters.SearchFilter):
         results = search.execute()
 
         response = search.to_queryset()
-        if self.document_class == AnswerDocument:
+        if self.document_class == documents.AnswerDocument:
             answer_options = [answer.english_text for answer in response]
             best_answer = utils.generate_best_response(
                 utils.translate_text(search_term), answer_options
@@ -68,8 +66,8 @@ class ElasticSearchFilter(filters.SearchFilter):
 
 
 class QuestionElasticSearchFilter(ElasticSearchFilter):
-    serializer_class = QuestionSerializer
-    document_class = QuestionDocument
+    serializer_class = serializer.QuestionListSerializer
+    document_class = documents.QuestionDocument
 
     def generate_q_expression(self, query):
         return Q("multi_match", query=query, fields=["text"], fuzziness="auto")
@@ -79,8 +77,8 @@ class QuestionCosineElasticSearchFilter(ElasticSearchFilter):
     search_param = "cosine"
     search_title = _("Cosine Elastic Search")
 
-    serializer_class = QuestionSerializer
-    document_class = QuestionDocument
+    serializer_class = serializer.QuestionListSerializer
+    document_class = documents.QuestionDocument
 
     def generate_q_expression(self, query):
         query = utils.translate_text(query)
@@ -115,5 +113,5 @@ class QuestionCosineElasticSearchFilter(ElasticSearchFilter):
 
 
 class AnswerCosineElasticSearchFilter(QuestionCosineElasticSearchFilter):
-    serializer_class = AnswerSerializer
-    document_class = AnswerDocument
+    serializer_class = serializer.AnswerListSerializer
+    document_class = documents.AnswerDocument
